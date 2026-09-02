@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Project 1 — Xinyu Su</title>
+  <meta name="description" content="Case study: Project 1.">
+
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav wrap">
+    <a href="index.html" class="nav__name">XINYU SU</a>
+    <nav class="nav__links">
+      <a href="index.html#work">WORK</a>
+      <a href="index.html#about">ABOUT</a>
+    </nav>
+  </header>
+
+  <main class="case">
+
+    <!-- ═══════════════════════════════════════════════════
+         Each block below is one <section class="cs-row grid">.
+         Left cell = label, right cell = content.
+         Copy a block, change the label and content, done.
+         Add class "cs-row--wide" to let media span both columns.
+         ═══════════════════════════════════════════════════ -->
+
+    <!-- ---------- TITLE ---------- -->
+    <section class="cs-row cs-row--head grid wrap">
+      <h1 class="cs-title">SPEECHWRITE</h1>
+      <p class="cs-lede">A tool for measuring speech recognition bias in accented English. Maps where transcription systems fail different groups of speakers, and by how much.</p>
+    </section>
+
+    <!-- ---------- FACTS ---------- -->
+    <section class="cs-row grid wrap">
+      <div></div>
+      <dl class="cs-facts">
+        <div>
+          <dt>Year</dt>
+          <dd>February 2026</dd>
+        </div>
+        <div>
+          <dt>Role</dt>
+          <dd>Design &amp; development</dd>
+        </div>
+        <div>
+          <dt>Tools</dt>
+          <dd>Whisper, Mozilla Common Voice, Figma</dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- ---------- CHALLENGE ---------- -->
+    <section class="cs-row grid wrap">
+      <h2 class="cs-label">CHALLENGE/PROBLEM</h2>
+      <div class="cs-body cs-body--medium">
+        <p>Subtitles that can't keep up with a speaker's accent are a familiar annoyance, but the failure is uneven and mostly invisible. Speech recognition systems perform worse for some speakers than others, and without a way to see where and by how much, the gap is hard to argue about or fix.</p>
+      </div>
+    </section>
+
+    <!-- ---------- SOLUTION ---------- -->
+    <section class="cs-row grid wrap">
+      <h2 class="cs-label">SOLUTION</h2>
+      <div class="cs-body">
+        <p>SpeechWrite runs Common Voice recordings through Whisper and compares the transcription to the reference at the phoneme level rather than the word level. Word error rate tells you a system got something wrong; phoneme comparison tells you which sounds it lost, which is where accent-specific failure actually lives. Those errors are then aggregated by the speaker's country and dialect and rendered as a global map, so a pattern that would otherwise sit in a results table becomes something you can point at.</p>
+      </div>
+    </section>
+
+    <!-- ---------- APPROACH (media spans full width) ---------- -->
+    <section class="cs-row cs-row--wide grid wrap">
+      <h2 class="cs-label">APPROACH/PROCESS</h2>
+      <div></div>
+      <div class="cs-media cs-media--2">
+        <div class="media-box"></div>
+        <div class="media-box"></div>
+      </div>
+    </section>
+
+    <!-- ---------- DELIVERABLES (media in right column) ---------- -->
+    <section class="cs-row grid wrap">
+      <h2 class="cs-label">FINAL DELIVERABLES</h2>
+      <div class="cs-media cs-media--3">
+        <div class="media-box"></div>
+        <div class="media-box"></div>
+        <div class="media-box"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

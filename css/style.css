@@ -1,0 +1,595 @@
+/* =========================================================
+   XINYU SU — portfolio
+   ---------------------------------------------------------
+   Everything you'd normally want to tweak lives in :root.
+   Change a value there and it updates across every page.
+   ========================================================= */
+
+@import url('https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap');
+
+:root {
+  /* --- typeface ---
+     Switzer, free for commercial use via Fontshare.
+     Open font-test.html to compare alternatives; change only this line. */
+  --font-sans: 'Switzer', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+
+  /* --- type scale (your three global sizes) --- */
+  --fs-small: 14px;
+  --fs-medium: 20px;
+  --fs-large: 40px;
+
+  /* --- the grid ---
+     page-margin  : outer left/right margin
+     nav-reserve  : space between the content's right edge and the page's
+                    right margin. The WORK link sits at the start of this
+                    reserve, so content and nav align by construction.
+     col-left     : width of the left column
+     col-gap      : gap between the two columns
+     40 + 300 + 38 = 378  <- where the right column begins  */
+  --page-margin: 40px;
+  --nav-reserve: 120px;
+  --col-left: 300px;
+  --col-gap: 38px;
+
+  --nav-h: 72px;
+
+  /* --- color --- */
+  --bg: #ffffff;
+  --ink: #000000;
+  --ink-soft: #6b6b6b;
+  --media-bg: #f2f2f2;      /* project thumbnails */
+  --media-bg-alt: #dcdcdc;  /* about portrait */
+  --media-radius: 18px;
+
+  /* --- media proportions ---
+     Taken straight from the Figma frames. Boxes keep their shape and
+     grow with the column width instead of being capped by viewport height. */
+  --media-ratio: 277 / 560;         /* project thumbnails: tall portrait */
+  --portrait-ratio: 295 / 460;      /* about photo */
+  --media-ratio-mobile: 5 / 3;      /* single image shown on small screens */
+}
+
+/* ---------------------------------------------------------
+   Reset
+   --------------------------------------------------------- */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body, h1, h2, h3, p, ul, li, figure {
+  margin: 0;
+  padding: 0;
+}
+
+ul { list-style: none; }
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* No scroll-padding-top here: .section carries scroll-margin-top, and
+     the two would stack, dropping snapped sections twice the nav height. */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--fs-small);
+  font-weight: 400;
+  line-height: 1.35;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Keyboard focus stays visible; mouse clicks don't get a ring. */
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+}
+
+/* ---------------------------------------------------------
+   Layout primitives
+   --------------------------------------------------------- */
+
+/* Horizontal page padding. Everything sits inside one of these. */
+.wrap {
+  padding-left: var(--page-margin);
+  padding-right: var(--page-margin);
+}
+
+/* The two-column grid used by every section.
+   Its right edge lands exactly where WORK begins in the nav. */
+.grid {
+  display: grid;
+  grid-template-columns: var(--col-left) 1fr;
+  column-gap: var(--col-gap);
+  width: calc(100% - var(--nav-reserve));
+}
+
+/* ---------------------------------------------------------
+   Nav
+   --------------------------------------------------------- */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--nav-h);
+  background: var(--bg);
+  font-size: var(--fs-small);
+  font-weight: 500;
+}
+
+.nav__name {
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* Fixed width = nav-reserve, so WORK starts at the content's right edge
+   and ABOUT finishes at the page's right margin. */
+.nav__links {
+  display: flex;
+  justify-content: space-between;
+  width: var(--nav-reserve);
+}
+
+.nav__links a {
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav__links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 180ms ease;
+}
+
+.nav__links a:hover::after,
+.nav__links a.is-active::after {
+  transform: scaleX(1);
+}
+
+/* ---------------------------------------------------------
+   Scroll snap (home page only — .snap is set on <html>)
+   'proximity' rather than 'mandatory' so long sections and
+   trackpads still behave.
+   --------------------------------------------------------- */
+
+html.snap {
+  scroll-snap-type: y proximity;
+}
+
+html.snap .section {
+  scroll-snap-align: start;
+  scroll-margin-top: var(--nav-h);
+}
+
+/* ---------------------------------------------------------
+   Sections
+   --------------------------------------------------------- */
+
+.section {
+  min-height: calc(100svh - var(--nav-h));
+  /* content taller than the viewport is allowed to run long */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+/* --- hero ---
+   Block is centered on the page; the text inside is left aligned. */
+
+.hero__inner {
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.hero__title {
+  font-size: var(--fs-large);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.hero__sub {
+  font-size: var(--fs-medium);
+  font-weight: 400;
+  line-height: 1.3;
+  margin-top: 4px;
+}
+
+/* Lighter weight on connective words, as in the mockup. */
+.hero__sub .soft {
+  font-weight: 300;
+  color: var(--ink-soft);
+}
+
+/* --- project thumbnail --- */
+
+.project__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  font-size: var(--fs-small);
+  align-self: start;
+}
+
+.project__title {
+  font-size: var(--fs-small);
+  font-weight: 700;
+}
+
+.project__desc { max-width: 34ch; }
+
+.project__meta .muted { color: var(--ink); }
+
+/* The whole media group is the link into the case study. */
+.project__link {
+  display: block;
+  border-radius: var(--media-radius);
+  transition: opacity 200ms ease;
+}
+
+.project__media {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+}
+
+.media-box {
+  aspect-ratio: var(--media-ratio);
+  background: var(--media-bg);
+  border-radius: var(--media-radius);
+  overflow: hidden;
+  transition: background-color 200ms ease;
+}
+
+.media-box img,
+.media-box video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Wide media, for desktop-app screenshots */
+.project__media--wide {
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.project__media--wide .media-box {
+  aspect-ratio: 16 / 10;
+}
+
+/* Hover state: boxes settle a shade darker and a label appears. */
+.project__link:hover .media-box,
+.project__link:focus-visible .media-box {
+  background: hsl(0, 0%, 100%);
+}
+
+.project__cue {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 14px;
+  font-size: var(--fs-small);
+  color: var(--ink-soft);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.project__link:hover .project__cue,
+.project__link:focus-visible .project__cue {
+  opacity: 1;
+}
+
+/* --- about --- */
+
+.about__portrait {
+  aspect-ratio: var(--portrait-ratio);
+  background: var(--media-bg-alt);
+  align-self: center;
+  overflow: hidden;
+}
+
+.about__portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: var(--fs-medium);
+  line-height: 1.4;
+}
+
+.about__body p + p { margin-top: 1.1em; }
+
+.about__body .tight + .tight { margin-top: 0; }
+
+.about__links {
+  display: flex;
+  gap: 64px;
+  margin-top: 56px;
+  font-size: var(--fs-small);
+}
+
+.about__links a {
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.about__links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 180ms ease;
+}
+
+.about__links a:hover::after { transform: scaleX(1); }
+
+/* =========================================================
+   CASE STUDY PAGE
+   Plain top-to-bottom scroll, same two-column grid.
+   Each .cs-row is one editable block: label left, content right.
+   ========================================================= */
+
+.case { padding-bottom: 160px; }
+
+.cs-row {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.cs-row--head { padding-top: 120px; }
+
+.cs-label {
+  font-size: var(--fs-small);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  align-self: start;
+}
+
+.cs-title {
+  font-size: var(--fs-large);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.cs-lede {
+  font-size: var(--fs-medium);
+  font-weight: 400;
+  max-width: 50ch;
+}
+
+.cs-body {
+  font-size: var(--fs-small);
+  line-height: 1.45;
+}
+
+.cs-body p + p { margin-top: 1em; }
+
+.cs-body--medium {
+  font-size: var(--fs-medium);
+}
+
+/* Facts strip under the title (year / role / tags) */
+.cs-facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  font-size: var(--fs-small);
+}
+
+.cs-facts dt {
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.cs-facts dd { margin: 0; }
+
+/* --- media rows for the case study ---
+   Full-bleed to the content grid; drop in as many as you need. */
+
+.cs-media {
+  display: grid;
+  gap: 36px;
+  margin-top: 8px;
+}
+
+.cs-media--1 { grid-template-columns: 1fr; }
+.cs-media--2 { grid-template-columns: 2fr 1fr; }
+.cs-media--3 { grid-template-columns: repeat(3, 1fr); }
+
+/* A media row that spans the whole content width, ignoring the label column */
+.cs-row--wide .cs-media { grid-column: 1 / -1; }
+
+.cs-media--1 .media-box { aspect-ratio: 3 / 2; }
+.cs-media--2 .media-box { aspect-ratio: auto; }
+.cs-media--2 > .media-box:first-child { aspect-ratio: 705 / 533; }
+.cs-media--3 .media-box { aspect-ratio: var(--media-ratio); }
+
+.cs-back {
+  display: inline-block;
+  margin-top: 24px;
+  font-size: var(--fs-small);
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+/* Narrower desktops: tighten the grid before it breaks. */
+@media (max-width: 1180px) {
+  :root {
+    --nav-reserve: 140px;
+    --col-left: 240px;
+    --col-gap: 32px;
+  }
+  .project__media { gap: 24px; }
+  .cs-media { gap: 24px; }
+}
+
+@media (max-width: 980px) {
+  :root {
+    --fs-large: 32px;
+    --fs-medium: 18px;
+    --col-left: 180px;
+    --nav-reserve: 130px;
+  }
+  .about__links { gap: 40px; }
+}
+
+/* Tablet and phone: single column, no snapping, tighter margins. */
+@media (max-width: 760px) {
+  :root {
+    --page-margin: 24px;
+    --nav-reserve: 0px;
+    --nav-h: 64px;
+    --fs-large: 28px;
+    --fs-medium: 17px;
+  }
+
+  html.snap { scroll-snap-type: none; }
+
+  .grid {
+    grid-template-columns: 1fr;
+    width: 100%;
+    row-gap: 28px;
+  }
+
+  .nav__links {
+    width: auto;
+    gap: 28px;
+  }
+
+  .section {
+    min-height: auto;
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+
+  .hero {
+    min-height: calc(100svh - var(--nav-h));
+    justify-content: center;
+  }
+
+  .hero__inner { width: 100%; }
+
+  /* --- home page: one image per project, and it is the link ---
+     Boxes 2 and 3 are desktop-only. The remaining box gets a shape that
+     suits a full-width column instead of a narrow one. */
+  .project__media {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .project__media .media-box:nth-child(n + 2) {
+    display: none;
+  }
+
+  .project__media .media-box {
+    aspect-ratio: var(--media-ratio-mobile);
+  }
+
+  /* The cue reads as a tap target rather than a hover hint. */
+  .project__cue {
+    opacity: 1;
+    justify-content: flex-start;
+    color: var(--ink);
+    margin-top: 12px;
+  }
+
+  .project__cue span {
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
+  }
+
+  /* --- about --- */
+  .about__portrait { aspect-ratio: var(--media-ratio-mobile); }
+
+  /* --- case study: keep every image, just reshape it --- */
+  .cs-media--2 > .media-box:first-child,
+  .cs-media--3 .media-box,
+  .cs-media .media-box { aspect-ratio: var(--media-ratio-mobile); }
+
+  .cs-media--1 .media-box { aspect-ratio: 3 / 2; }
+
+  .cs-media--2,
+  .cs-media--3 { grid-template-columns: 1fr; }
+
+  .cs-facts { grid-template-columns: 1fr; gap: 16px; }
+
+  .cs-row { padding-top: 28px; padding-bottom: 28px; }
+  .cs-row--head { padding-top: 64px; }
+
+  /* The hover cue is meaningless on touch — show it always. */
+  .project__cue {
+    opacity: 1;
+    justify-content: flex-start;
+  }
+}
+
+/* ---------------------------------------------------------
+   Motion preferences
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  html.snap {
+    scroll-snap-type: none;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* ---------------------------------------------------------
+   Print
+   --------------------------------------------------------- */
+
+@media print {
+  .nav { position: static; }
+  .section { min-height: auto; page-break-inside: avoid; }
+}

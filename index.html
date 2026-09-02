@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" class="snap">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Xinyu Su</title>
+  <meta name="description"
+    content="Xinyu Su — developer and designer. Computer Science and Industrial Design at Georgia Tech.">
+
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav wrap">
+    <a href="#top" class="nav__name">XINYU SU</a>
+    <nav class="nav__links">
+      <a href="#work">WORK</a>
+      <a href="#about">ABOUT</a>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ HERO ============ -->
+    <section class="section hero wrap" id="hero">
+      <div class="hero__inner">
+        <h1 class="hero__title">Hi, I&rsquo;m Xinyu. I&rsquo;m a developer with the eye of a designer.</h1>
+        <p class="hero__sub">Computer Science <span class="soft">and</span> Industrial Design <span
+            class="soft">at</span> Georgia Institute of Technology</p>
+      </div>
+    </section>
+
+    <!-- ============ PROJECT 1 ============ -->
+    <section class="section wrap" id="work">
+      <div class="grid">
+
+        <div class="project__meta">
+          <h2 class="project__title">SPEECHWRITE</h2>
+          <p class="project__desc">I co-built a tool that measures speech recognition bias across 5+ English accent
+            groups, and found error rates 2–5× higher for non-Western accents.</p>
+          <p class="project__desc">After testing a few ways to score transcription errors, I chose phoneme-level
+            comparison over word error rate, and I was responsible for the analysis pipeline end to end.</p>
+          <p class="muted">Year: February 2026</p>
+          <p class="muted">Role: Research &amp; backend, in a team of two</p>
+          <p class="muted">Tools: Figma, OpenAI Whisper, Mozilla Common Voice</p>
+        </div>
+
+        <a class="project__link" href="speechwrite.html" aria-label="Open the Project 1 case study">
+          <div class="project__media project__media--wide">
+
+            <!-- Box 1 is the only one shown on small screens, so it takes a
+                 <picture>: the <source> is your custom mobile crop, the <img>
+                 is the desktop version and the fallback. -->
+
+
+            <!-- Desktop only. -->
+            <div class="media-box">
+              <img src="images/speechwrite/speechwrite-1.png" alt="">
+            </div>
+            <!-- <div class="media-box">
+              <img src="images/speechwrite/speechwrite-2.png" alt="">
+            </div> -->
+
+          </div>
+          <p class="project__cue"><span>view case study</span></p>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- ============ PROJECT 2 ============ -->
+    <section class="section wrap" id="project-2">
+      <div class="grid">
+
+        <div class="project__meta">
+          <h2 class="project__title">hirae</h2>
+          <p class="project__desc">A mobile app that turns walking into an exploration game. Areas you've
+            physically walked through fill in green on the map and stay filled, and each walk auto-logs as a
+            journal entry.</p>
+          <p class="project__desc">I designed the whole thing in Figma and built it as a working prototype in
+            Expo and React Native, including the location tracking, area reveal, and journal.</p>
+          <p class="muted">Year: August 2026</p>
+          <p class="muted">Role: Concept, design & prototype</p>
+          <p class="muted">Tools: Figma, Expo/React Native, Mapbox, Supabase</p>
+        </div>
+
+        <a class="project__link" href="hirae.html" aria-label="Open the Project 2 case study">
+          <div class="project__media">
+
+            <!-- Box 1 is the only one shown on small screens, so it takes a
+                 <picture>: the <source> is your custom mobile crop, the <img>
+                 is the desktop version and the fallback. -->
+            <div class="media-box">
+              <!-- Uncomment when your images exist. The <source> is the custom
+                   mobile crop; the <img> is the desktop one and the fallback. -->
+              <picture>
+                <source media="(max-width: 760px)" srcset="images/hirae/hirae-1.png">
+                <img src="images/hirae/hirae-1.png" alt="Describe what this shows">
+              </picture>
+             
+            </div>
+
+            <!-- Desktop only. -->
+            <div class="media-box">
+              <img src="images/hirae/hirae-2.png" alt="">
+            </div>
+            <div class="media-box">
+              <img src="images/hirae/hirae-3.png" alt="">
+            </div>
+
+          </div>
+          <p class="project__cue"><span>view case study</span></p>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section wrap" id="about">
+      <div class="grid">
+
+        <div class="about__portrait">
+          <!-- <img src="images/portrait.jpg" alt="Xinyu Su"> -->
+        </div>
+
+        <div class="about__body">
+          <p>Nice to meet you!</p>
+
+          <p>I'm currently a full-time student at the Georgia Institute of Technology. This past summer, I was a lead
+            instructor at iCode Augusta, where I got to teach kids how to make
+            games in Roblox, Unreal Engine, and Minecraft :D. I'm also did IT backend work to manage
+            the technical infrastructure&hellip; but that part's not as fun. I'm also working on getting
+            my AWS Cloud Practitioner certification.</p>
+
+          <p class="tight">I'm pursuing a B.S. in CS and a minor in Industrial Design. Outside of school, I love being
+            active
+            outdoors, playing music for my band, and exploring new hobbies.</p>
+          <p class="tight">I'm passionate about combining technology and creative arts to produce unique products.
+            I love how I can take ideas that come from pure imagination and design and build them
+            into real experiences.</p>
+
+          <p>Connect with me, I'd love to chat about anything, it doesn't have to be tech related!</p>
+
+          <div class="about__links">
+            <a href="https://www.linkedin.com/in/YOUR-HANDLE" target="_blank" rel="noopener">LINKEDIN</a>
+            <a href="mailto:you@example.com">EMAIL</a>
+            <a href="https://github.com/YOUR-HANDLE" target="_blank" rel="noopener">GITHUB</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+
+</html>

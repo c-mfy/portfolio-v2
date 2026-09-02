@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>hirae — Xinyu Su</title>
+  <meta name="description" content="hirae — a mobile app that turns walking into an exploration game. Concept, design and prototype by Xinyu Su.">
+
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav wrap">
+    <a href="index.html" class="nav__name">XINYU SU</a>
+    <nav class="nav__links">
+      <a href="index.html#work">WORK</a>
+      <a href="index.html#about">ABOUT</a>
+    </nav>
+  </header>
+
+  <main class="case">
+
+    <!-- ---------- TITLE ---------- -->
+    <section class="cs-row cs-row--head grid wrap">
+      <h1 class="cs-title">hirae</h1>
+      <p class="cs-lede">A mobile app that turns walking into an exploration game. Areas you've
+        physically walked through fill in green and stay filled, building a map of everywhere
+        you've been.</p>
+    </section>
+
+    <!-- ---------- FACTS ---------- -->
+    <section class="cs-row grid wrap">
+      <div></div>
+      <dl class="cs-facts">
+        <div>
+          <dt>Year</dt>
+          <dd>2026</dd>
+        </div>
+        <div>
+          <dt>Role</dt>
+          <dd>Concept, design &amp; prototype</dd>
+        </div>
+        <div>
+          <dt>Tools</dt>
+          <dd>Figma, Expo/React Native, Mapbox, Supabase</dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- ---------- CHALLENGE ---------- -->
+    <section class="cs-row grid wrap">
+      <h2 class="cs-label">CHALLENGE/PROBLEM</h2>
+      <div class="cs-body cs-body--medium">
+        <p>Most people have no real record of where they've been. Photos are scattered across a
+          camera roll, and map apps show where you are, not where you've already been. Travel
+          logging apps exist, but they ask you to stop and enter things manually, which almost
+          nobody keeps up.</p>
+      </div>
+    </section>
+
+    <!-- ---------- SOLUTION ---------- -->
+    <section class="cs-row grid wrap">
+      <h2 class="cs-label">SOLUTION</h2>
+      <div class="cs-body">
+        <p>hirae records passively and rewards you for it. Walk somewhere and that area fills in
+          green on the map permanently. Landmarks unlock by photographing them in person. Walks
+          log themselves as journal entries you can rename and annotate afterwards, so the record
+          builds up without ever asking you to maintain it.</p>
+      </div>
+    </section>
+
+    <!-- ---------- KEY DECISIONS ---------- -->
+    <section class="cs-row grid wrap">
+      <h2 class="cs-label">KEY DECISIONS</h2>
+      <div class="cs-body">
+        <p><b>What "explored" measures.</b> Percent of the world is useless &mdash; you'd sit near
+          0.0004% forever. I scoped progress to your city by area, and made world progress count
+          countries visited instead, out of 195.</p>
+        <p><b>How landmark photos verify.</b> Image recognition would confirm what you
+          photographed. I used the photo's EXIF coordinates against the landmark's radius instead.
+          It only proves where you stood, not what you shot, but it's a fraction of the complexity
+          and enough for a walking app.</p>
+        <p><b>What counts as a walk.</b> Raw GPS produces constant noise. A session only saves
+          past 150m and three minutes of real movement, and points implying vehicle speed get
+          discarded, so the journal stays clean without the user curating it.</p>
+      </div>
+    </section>
+
+    <!-- ---------- PROCESS (media spans full width) ---------- -->
+    <section class="cs-row cs-row--wide grid wrap">
+      <h2 class="cs-label">APPROACH/PROCESS</h2>
+      <div></div>
+      <div class="cs-media cs-media--2">
+        <div class="media-box">
+          <!-- <img src="images/hirae/hirae-process-1.webp" alt="Describe what this shows"> -->
+        </div>
+        <div class="media-box">
+          <!-- <img src="images/hirae/hirae-process-2.webp" alt="Describe what this shows"> -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- WHERE IT STANDS ---------- -->
+    <section class="cs-row grid wrap">
+      <h2 class="cs-label">WHERE IT STANDS</h2>
+      <div class="cs-body">
+        <p>Designed end to end in Figma and built as a working prototype in Expo and React Native:
+          location tracking, the area reveal, and the journal all run on a device. It isn't on any
+          app store, yet, but in the future I would love to deploy it to real users.</p>
+      </div>
+    </section>
+
+    <!-- ---------- SCREENS ---------- -->
+    <section class="cs-row grid wrap">
+      <h2 class="cs-label">SCREENS</h2>
+      <div class="cs-media cs-media--3">
+        <div class="media-box">
+          <!-- <img src="images/hirae/hirae-1.webp" alt="Describe what this shows"> -->
+        </div>
+        <div class="media-box">
+          <!-- <img src="images/hirae/hirae-2.webp" alt="Describe what this shows"> -->
+        </div>
+        <div class="media-box">
+          <!-- <img src="images/hirae/hirae-3.webp" alt="Describe what this shows"> -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
