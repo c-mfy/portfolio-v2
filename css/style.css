@@ -71,7 +71,7 @@ img {
 }
 
 html {
-  scroll-behavior: smooth;
+  /* Lenis drives smooth scrolling now; native smooth would fight it. */
   /* No scroll-padding-top here: .section carries scroll-margin-top, and
      the two would stack, dropping snapped sections twice the nav height. */
   -webkit-text-size-adjust: 100%;
@@ -172,17 +172,13 @@ a {
 }
 
 /* ---------------------------------------------------------
-   Scroll snap (home page only — .snap is set on <html>)
-   'proximity' rather than 'mandatory' so long sections and
-   trackpads still behave.
+   Scroll snap
+   Lenis does not support CSS scroll-snap, so snapping is handled
+   by lenis/snap in js/main.js. scroll-margin-top is kept for any
+   plain anchor jumps that bypass Lenis.
    --------------------------------------------------------- */
 
-html.snap {
-  scroll-snap-type: y proximity;
-}
-
-html.snap .section {
-  scroll-snap-align: start;
+.section {
   scroll-margin-top: var(--nav-h);
 }
 
@@ -361,6 +357,65 @@ html.snap .section {
 
 .about__links a:hover::after { transform: scaleX(1); }
 
+/* ---------------------------------------------------------
+   Custom cursor
+   Desktop only. The dot is solid black or solid white depending
+   on how bright the thing behind it is — main.js measures that
+   and sets .is-light or .is-dark. No blend modes.
+   --------------------------------------------------------- */
+
+.cursor {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  align-items: center;
+  justify-content: center;
+  transition: width 250ms ease, height 250ms ease,
+              background-color 150ms linear, color 150ms linear;
+}
+
+/* .is-dark  = dark backdrop  -> white cursor
+   .is-light = light backdrop -> black cursor */
+.cursor.is-dark  { background: #fff; color: #000; }
+.cursor.is-light { background: var(--ink); color: #fff; }
+
+.cursor__label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: inherit;
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.cursor.is-message {
+  width: 80px;
+  height: 80px;
+}
+
+.cursor.is-message .cursor__label { opacity: 1; }
+
+/* Only where there's a real pointer, and only at desktop widths. */
+@media (hover: hover) and (pointer: fine) and (min-width: 761px) {
+  body.has-cursor { cursor: none; }
+  body.has-cursor a,
+  body.has-cursor button { cursor: none; }
+  .cursor { display: flex; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor { transition: none; }
+}
+
 /* =========================================================
    CASE STUDY PAGE
    Plain top-to-bottom scroll, same two-column grid.
@@ -486,8 +541,6 @@ html.snap .section {
     --fs-medium: 17px;
   }
 
-  html.snap { scroll-snap-type: none; }
-
   .grid {
     grid-template-columns: 1fr;
     width: 100%;
@@ -573,9 +626,6 @@ html.snap .section {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-  html.snap {
-    scroll-snap-type: none;
   }
   *,
   *::before,
