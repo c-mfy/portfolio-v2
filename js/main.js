@@ -92,28 +92,28 @@
    position rather than replacing it.
    ========================================================= */
 
-// (function () {
-//   var links = document.querySelectorAll('.nav__links a[href^="#"]');
-//   if (!links.length || !('IntersectionObserver' in window)) return;
+(function () {
+  var links = document.querySelectorAll('.nav__links a[href^="#"]');
+  if (!links.length || !('IntersectionObserver' in window)) return;
 
-//   var map = {};
-//   links.forEach(function (link) {
-//     var section = document.querySelector(link.getAttribute('href'));
-//     if (section) map[section.id] = link;
-//   });
+  var map = {};
+  links.forEach(function (link) {
+    var section = document.querySelector(link.getAttribute('href'));
+    if (section) map[section.id] = link;
+  });
 
-//   var observer = new IntersectionObserver(function (entries) {
-//     entries.forEach(function (entry) {
-//       if (!entry.isIntersecting) return;
-//       links.forEach(function (l) { l.classList.remove('is-active'); });
-//       if (map[entry.target.id]) map[entry.target.id].classList.add('is-active');
-//     });
-//   }, { rootMargin: '-45% 0px -45% 0px' });
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      links.forEach(function (l) { l.classList.remove('is-active'); });
+      if (map[entry.target.id]) map[entry.target.id].classList.add('is-active');
+    });
+  }, { rootMargin: '-45% 0px -45% 0px' });
 
-//   Object.keys(map).forEach(function (id) {
-//     observer.observe(document.getElementById(id));
-//   });
-// })();
+  Object.keys(map).forEach(function (id) {
+    observer.observe(document.getElementById(id));
+  });
+})();
 
 
 /* =========================================================
@@ -185,6 +185,9 @@
     var under = document.elementFromPoint(x, y);
     if (!under) return;
 
+    /* Some elements stand in their own pointer — hide the dot over them. */
+    cursor.classList.toggle('is-hidden', !!under.closest('[data-cursor-hide]'));
+
     var dark = backdropIsDark(under);
     if (dark === lastDark) return;      /* only touch classes on a change */
     lastDark = dark;
@@ -202,8 +205,8 @@
   }, { passive: true });
 
   /* Hide it when the pointer leaves the window entirely. */
-  document.addEventListener('mouseleave', function () { cursor.style.opacity = '0'; });
-  document.addEventListener('mouseenter', function () { cursor.style.opacity = '1'; });
+  document.addEventListener('mouseleave', function () { cursor.classList.add('is-away'); });
+  document.addEventListener('mouseenter', function () { cursor.classList.remove('is-away'); });
 
   document.querySelectorAll('[data-message]').forEach(function (el) {
     el.addEventListener('mouseenter', function () {
@@ -213,5 +216,58 @@
     el.addEventListener('mouseleave', function () {
       cursor.classList.remove('is-message');
     });
+  });
+})();
+
+
+/* =========================================================
+   4. DESIGN vs CODE SLIDER
+   ---------------------------------------------------------
+   Each .compare--slider holds a transparent <input type="range">
+   covering the whole frame. Dragging it, or using arrow keys,
+   updates the --pos custom property, which clips the top layer
+   and moves the handle. No drag maths, no pointer listeners,
+   no library — the browser does it, and keyboard and screen
+   reader support come free.
+   ========================================================= */
+
+(function () {
+  /* Set to false for click-and-drag only. */
+  var FOLLOW_ON_HOVER = true;
+
+  document.querySelectorAll('.compare--slider').forEach(function (frame) {
+    var range = frame.querySelector('.compare__range');
+    if (!range) return;
+
+    function apply() {
+      frame.style.setProperty('--pos', range.value + '%');
+    }
+
+    range.addEventListener('input', apply);
+    apply();
+
+    if (!FOLLOW_ON_HOVER) return;
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+    /* The divider tracks the pointer, so the handle knob reads as the
+       cursor itself. Throttled to one update per frame. */
+    var queued = false, px = 0, py = 0;
+
+    frame.addEventListener('mousemove', function (e) {
+      px = e.clientX;
+      py = e.clientY;
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(function () {
+        queued = false;
+        var box = frame.getBoundingClientRect();
+        var pct = ((px - box.left) / box.width) * 100;
+        range.value = Math.max(0, Math.min(100, pct));
+        /* The knob also follows vertically, so on a tall image it sits
+           under the pointer rather than stranded at the midpoint. */
+        frame.style.setProperty('--posY', (py - box.top) + 'px');
+        apply();
+      });
+    }, { passive: true });
   });
 })();

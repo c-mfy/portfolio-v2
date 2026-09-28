@@ -125,7 +125,7 @@
     </section>
 
     <!-- ============ PROJECT 2 ============ -->
-    <section class="section wrap" id="project-2">
+    <section class="section wrap" id="project-3">
       <div class="grid">
 
         <div class="project__meta">
@@ -168,6 +168,42 @@
       </div>
     </section>
 
+    <!-- ============ PROJECT 4 — FDA (slider instead of a thumbnail) ============ -->
+    <section class="section wrap" id="project-4">
+      <div class="grid">
+
+        <div class="project__meta">
+          <h2 class="project__title">Recall Me Maybe</h2>
+          <p class="project__desc">Scrapes consumer complaint forums and cross-references them
+            against official FDA data to surface likely recalls before they're announced.</p>
+          <p class="project__desc">I did the design and frontend, and built the Grok integration
+            that classifies complaint text. Move across it to compare the mockup against the build.</p>
+          <p class="muted">2026</p>
+          <p class="muted">Design, frontend &amp; LLM integration</p>
+          <p class="muted">Figma, Grok, Exa, openFDA</p>
+        </div>
+
+        <!-- No <a> wrapper: there's no case study page, and a range input
+             can't live inside a link. -->
+        <div class="compare compare--slider" data-cursor-hide>
+          <span class="compare__side compare__side--left">Figma</span>
+          <span class="compare__side compare__side--right">Built</span>
+
+          <div class="compare__layer compare__layer--bottom">
+            <img src="images/fda/build.png" alt="The interface as built in code">
+          </div>
+          <div class="compare__layer compare__layer--top">
+            <img src="images/fda/design.png" alt="The original Figma mockup">
+          </div>
+
+          <div class="compare__handle" aria-hidden="true"></div>
+          <input class="compare__range" type="range" min="0" max="100" value="50" step="0.1"
+                 aria-label="Wipe between the Figma mockup and the built interface">
+        </div>
+
+      </div>
+    </section>
+
     <!-- ============ ABOUT ============ -->
     <section class="section wrap" id="about">
       <div class="grid">
@@ -195,9 +231,9 @@
           <p>Connect with me, I'd love to chat about anything, it doesn't have to be tech related!</p>
 
           <div class="about__links">
-            <a href="https://www.linkedin.com/in/xinyu-su-" target="_blank" rel="noopener">LINKEDIN</a>
-            <a href="mailto:xsu82@gatech.edu">EMAIL</a>
-            <a href="https://github.com/c-mfy" target="_blank" rel="noopener">GITHUB</a>
+            <a href="https://www.linkedin.com/in/YOUR-HANDLE" target="_blank" rel="noopener">LINKEDIN</a>
+            <a href="mailto:you@example.com">EMAIL</a>
+            <a href="https://github.com/YOUR-HANDLE" target="_blank" rel="noopener">GITHUB</a>
           </div>
         </div>
 

@@ -357,6 +357,208 @@ a {
 
 .about__links a:hover::after { transform: scaleX(1); }
 
+/* =========================================================
+   DESIGN vs CODE
+   Three layouts for showing a mockup against its build.
+   All three live inside the right column of a .cs-row, so they
+   inherit the same grid, radius and spacing as .cs-media.
+
+     .compare--split    mockup and build side by side
+     .compare--slider   one wiped over the other, draggable
+     .compare--embed    live Figma iframe
+   ========================================================= */
+
+.compare {
+  display: grid;
+  gap: 36px;
+}
+
+.compare__tag {
+  display: block;
+  margin-bottom: 10px;
+  font-size: var(--fs-small);
+  letter-spacing: 0.02em;
+  color: var(--ink-soft);
+}
+
+.compare__note {
+  margin-top: 14px;
+  font-size: var(--fs-small);
+  line-height: 1.45;
+  color: var(--ink-soft);
+  max-width: 60ch;
+}
+
+/* --- 1. side by side ------------------------------------- */
+
+.compare--split {
+  grid-template-columns: 1fr 1fr;
+}
+
+.compare--split .media-box {
+  aspect-ratio: 16 / 10;
+}
+
+/* --- 2. before / after slider ----------------------------
+   Two stacked layers; the top one is clipped to --pos, which a
+   range input drives. The input is a real <input type="range">
+   laid transparently over the whole thing, so arrow keys work
+   and screen readers announce it — no custom key handling. */
+
+.compare--slider {
+  position: relative;
+  border-radius: var(--media-radius);
+  overflow: hidden;
+  background: var(--media-bg);
+  --pos: 50%;
+  --posY: 50%;
+  touch-action: pan-y;
+}
+
+/* The bottom layer stays in normal flow, so the frame takes the image's
+   own height at whatever width the column gives it. Nothing is cropped
+   or stretched — the images keep their real proportions. The top layer
+   is absolute on top of it. Both images must share one aspect ratio. */
+.compare__layer--bottom {
+  position: relative;
+}
+
+.compare__layer--top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.compare__layer img {
+  display: block;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Top layer shows from the left edge to the handle. */
+.compare__layer--top {
+  clip-path: inset(0 calc(100% - var(--pos)) 0 0);
+}
+
+.compare__handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--pos);
+  width: 2px;
+  margin-left: -1px;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.18);
+  pointer-events: none;
+}
+
+.compare__handle::after {
+  content: '';
+  position: absolute;
+  /* Follows the pointer when hovering; falls back to the middle. */
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.22);
+}
+
+/* Corner labels so it's obvious which side is which. */
+.compare__side {
+  position: absolute;
+  top: 16px;
+  z-index: 2;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.compare__side--left  { left: 16px; }
+.compare__side--right { right: 16px; }
+
+/* The actual control: invisible, full-bleed, keyboard-operable. */
+.compare__range {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  cursor: none;
+}
+
+body.has-cursor .compare__range,
+body.has-cursor .compare__range::-webkit-slider-thumb,
+body.has-cursor .compare__range::-moz-range-thumb {
+  cursor: none;
+}
+
+.compare__range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 44px;
+  height: 100%;
+  cursor: none;
+}
+
+.compare__range::-moz-range-thumb {
+  width: 44px;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  cursor: none;
+}
+
+/* Keyboard users get a visible ring on the frame, since the input itself
+   is transparent and would otherwise focus invisibly. */
+.compare__range:focus-visible {
+  outline: none;
+}
+
+.compare--slider:has(.compare__range:focus-visible) {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+}
+
+/* --- 3. Figma embed -------------------------------------- */
+
+.compare--embed iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border: 1px solid var(--media-bg);
+  border-radius: var(--media-radius);
+  background: var(--media-bg);
+}
+
+/* --- responsive ------------------------------------------ */
+
+@media (max-width: 760px) {
+  .compare { gap: 20px; }
+
+  .compare--split { grid-template-columns: 1fr; }
+  .compare--split .media-box { aspect-ratio: var(--media-ratio-mobile); }
+
+  .compare__handle::after { width: 34px; height: 34px; }
+
+  .compare--embed iframe { aspect-ratio: 3 / 4; }
+}
+
 /* ---------------------------------------------------------
    Custom cursor
    Desktop only. The dot is solid black or solid white depending
@@ -400,6 +602,13 @@ a {
 .cursor.is-message {
   width: 80px;
   height: 80px;
+}
+
+/* Over anything marked data-cursor-hide, the dot disappears entirely.
+   On the comparison slider the handle knob is the pointer instead. */
+.cursor.is-hidden,
+.cursor.is-away {
+  opacity: 0;
 }
 
 .cursor.is-message .cursor__label { opacity: 1; }
