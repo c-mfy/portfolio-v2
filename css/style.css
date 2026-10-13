@@ -1027,3 +1027,99 @@ body.has-cursor .compare__range::-moz-range-thumb {
   .nav { position: static; }
   .section { min-height: auto; page-break-inside: avoid; }
 }
+
+/* ---------------------------------------------------------
+   Hero: "designer" hover
+   A Figma-style selection frame around the word, plus a
+   multiplayer cursor with a name tag in place of the dot.
+   --------------------------------------------------------- */
+
+:root {
+  --figma: #0d99ff;
+}
+
+.sel {
+  position: relative;
+  display: inline-block;
+}
+
+.sel__frame {
+  position: absolute;
+  inset: 0 -4px -2px;
+  border: 1px solid var(--figma);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 120ms ease;
+}
+
+.sel:hover .sel__frame { opacity: 1; }
+
+/* Corner handles */
+.sel__frame i {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  background: #fff;
+  border: 1px solid var(--figma);
+}
+
+.sel__frame i:nth-child(1) { top: -4px;    left: -4px; }
+.sel__frame i:nth-child(2) { top: -4px;    right: -4px; }
+.sel__frame i:nth-child(3) { bottom: -4px; left: -4px; }
+.sel__frame i:nth-child(4) { bottom: -4px; right: -4px; }
+
+/* Size tag under the frame */
+.sel__size {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 2px 5px;
+  border-radius: 3px;
+  background: var(--figma);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+/* Multiplayer cursor */
+.mp-cursor {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+
+.mp-cursor.is-on { opacity: 1; }
+
+.mp-cursor__arrow {
+  display: block;
+  fill: var(--figma);
+  stroke: #fff;
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+}
+
+.mp-cursor__name {
+  position: absolute;
+  top: 18px;
+  left: 12px;
+  padding: 3px 7px;
+  border-radius: 2px 8px 8px 8px;
+  background: var(--figma);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+@media (hover: hover) and (pointer: fine) and (min-width: 761px) {
+  .mp-cursor { display: block; }
+}

@@ -480,3 +480,42 @@ document.querySelectorAll('.tabs-scroll').forEach(function (section) {
     }, { passive: true });
   });
 })();
+
+
+/* =========================================================
+   6. "DESIGNER" HOVER
+   Swaps the dot for a Figma-style multiplayer cursor and fills
+   in the selection frame's size tag with the word's real size.
+   ========================================================= */
+
+(function () {
+  var mp = document.querySelector('.mp-cursor');
+  var targets = document.querySelectorAll('.sel');
+  if (!targets.length) return;
+
+  targets.forEach(function (el) {
+    var size = el.querySelector('.sel__size');
+
+    el.addEventListener('mouseenter', function () {
+      if (size) {
+        var box = el.getBoundingClientRect();
+        size.textContent = Math.round(box.width) + ' × ' + Math.round(box.height);
+      }
+      if (mp) {
+        mp.classList.add('is-on');
+      }
+    });
+
+    el.addEventListener('mouseleave', function () {
+      if (mp) {
+        mp.classList.remove('is-on');
+      }
+    });
+  });
+
+  if (!mp) return;
+
+  document.addEventListener('mousemove', function (e) {
+    mp.style.transform = 'translate(' + e.clientX + 'px, ' + e.clientY + 'px)';
+  }, { passive: true });
+})();
