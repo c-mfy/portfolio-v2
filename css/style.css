@@ -979,7 +979,10 @@ body.has-cursor .compare__range::-moz-range-thumb {
   }
 
   /* --- about --- */
-  .about__portrait { aspect-ratio: var(--media-ratio-mobile); }
+     .about__portrait {
+     aspect-ratio: var(--portrait-ratio);
+     max-width: 320px;
+   }
 
   /* --- case study: keep every image, just reshape it --- */
   .cs-media--2 > .media-box:first-child,
@@ -1001,6 +1004,8 @@ body.has-cursor .compare__range::-moz-range-thumb {
     opacity: 1;
     justify-content: flex-start;
   }
+  
+  #project-4 { display: none; }
 }
 
 /* ---------------------------------------------------------
