@@ -14,9 +14,9 @@
   --font-sans: 'Switzer', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
 
   /* --- type scale (your three global sizes) --- */
-  --fs-small: 14px;
-  --fs-medium: 20px;
-  --fs-large: 40px;
+  --fs-small: 16px;
+  --fs-medium: 22px;
+  --fs-large: 42px;
 
   /* --- the grid ---
      page-margin  : outer left/right margin
@@ -28,8 +28,8 @@
      40 + 300 + 38 = 378  <- where the right column begins  */
   --page-margin: 40px;
   --nav-reserve: 120px;
-  --col-left: 300px;
-  --col-gap: 38px;
+  --col-left: 400px;
+  --col-gap: 60px;
 
   --nav-h: 72px;
 
@@ -166,8 +166,7 @@ a {
   transition: transform 180ms ease;
 }
 
-.nav__links a:hover::after,
-.nav__links a.is-active::after {
+.nav__links a:hover::after {
   transform: scaleX(1);
 }
 
@@ -307,9 +306,10 @@ a {
 
 .about__portrait {
   aspect-ratio: var(--portrait-ratio);
-  background: var(--media-bg-alt);
+  background: transparent;
   align-self: center;
   overflow: hidden;
+  transform: scale(0.8);
 }
 
 .about__portrait img {
@@ -356,6 +356,181 @@ a {
 }
 
 .about__links a:hover::after { transform: scaleX(1); }
+
+/* --- tab group (smaller projects) ---
+   Left column: titles separated by hairlines. The active one is ink,
+   the rest are soft; the active body opens with a height transition.
+   Right column: stacked panels that crossfade. */
+
+/* Scroll-driven version: the section is one screen tall per tab
+   (main.js sets --tab-count) and the pin stays stuck under the nav
+   while you scroll through it. */
+.tabs-scroll {
+  display: block;
+  min-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  height: calc(var(--tab-count, 1) * (100svh - var(--nav-h)));
+}
+
+.tabs-scroll__pin {
+  position: sticky;
+  top: var(--nav-h);
+  height: calc(100svh - var(--nav-h));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.tabs__list {
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+}
+
+.tabs__item + .tabs__item {
+  border-top: 1px solid var(--media-bg-alt);
+}
+
+.tabs__title {
+  display: block;
+  width: 100%;
+  padding: 18px 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: var(--fs-small);
+  font-weight: 700;
+  text-align: left;
+  color: var(--ink-soft);
+  transition: color 200ms ease;
+  cursor: pointer;
+}
+
+.tabs__item:first-child .tabs__title { padding-top: 0; }
+
+.tabs__title:hover,
+.tabs__item.is-active .tabs__title {
+  color: var(--ink);
+}
+
+/* 0fr -> 1fr animates to the content's real height, no JS measuring. */
+.tabs__body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 300ms ease;
+}
+
+.tabs__item.is-active .tabs__body {
+  grid-template-rows: 1fr;
+}
+
+.tabs__body-inner {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  font-size: var(--fs-small);
+}
+
+/* Bottom spacing lives on the inner block so it collapses with it. */
+.tabs__body-inner > :last-child { margin-bottom: 24px; }
+
+.tabs__stage {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: var(--media-bg);
+  border-radius: var(--media-radius);
+  overflow: hidden;
+}
+
+.tabs__panel {
+  position: absolute;
+  inset: 0;
+  display: block;
+  opacity: 0;
+  visibility: hidden;
+  cursor: pointer;
+  transition: opacity 300ms ease, visibility 0s linear 300ms;
+}
+
+.tabs__panel.is-active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 300ms ease, visibility 0s;
+}
+
+.tabs__panel img,
+.tabs__panel video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+body.has-cursor .tabs__panel { cursor: none; }
+
+/* Phones: a normal section, tabs are tapped. */
+@media (max-width: 760px) {
+  .tabs-scroll { height: auto; }
+
+  .tabs-scroll__pin {
+    position: static;
+    height: auto;
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+}
+
+/* --- section dots ---
+   Fixed on the right edge, one per project. Hidden on the hero and
+   about; main.js adds .is-visible while a project is on screen. */
+
+.dots {
+  position: fixed;
+  top: 50%;
+  right: calc(var(--page-margin) - 8px);
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(-50%);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 250ms ease, visibility 0s linear 250ms;
+}
+
+.dots.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 250ms ease, visibility 0s;
+}
+
+/* The link is a bigger hit area; the dot itself is the ::before. */
+.dots a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.dots a::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--media-bg-alt);
+  transition: background-color 200ms ease;
+}
+
+.dots a:hover::before { background: var(--ink-soft); }
+.dots a.is-active::before { background: var(--ink); }
+
+@media (max-width: 760px) {
+  .dots { display: none; }
+}
 
 /* =========================================================
    DESIGN vs CODE

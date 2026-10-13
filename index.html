@@ -28,7 +28,15 @@
     </nav>
   </header>
 
-  <main id="top">
+  <!-- Section dots. One per project; href matches the section id. -->
+  <nav class="dots" aria-label="Projects">
+    <a href="#work" aria-label="SpeechWrite"></a>
+    <a href="#project-2" aria-label="hirae"></a>
+    <a href="#project-3" aria-label="AKARI"></a>
+    <a href="#project-4" aria-label="Recall Me Maybe and more"></a>
+  </nav>
+
+  <main>
 
     <!-- ============ HERO ============ -->
     <section class="section hero wrap" id="hero">
@@ -168,39 +176,97 @@
       </div>
     </section>
 
-    <!-- ============ PROJECT 4 — FDA (slider instead of a thumbnail) ============ -->
-    <section class="section wrap" id="project-4">
-      <div class="grid">
+    <!-- ============ SMALLER PROJECTS — tab group ============
+         Left: a list of titles. Right: one media panel per tab.
 
-        <div class="project__meta">
-          <h2 class="project__title">Recall Me Maybe</h2>
-          <p class="project__desc">Scrapes consumer complaint forums and cross-references them
-            against official FDA data to surface likely recalls before they're announced.</p>
-          <p class="project__desc">I did the design and frontend, and built the Grok integration
-            that classifies complaint text. Move across it to compare the mockup against the build.</p>
-          <p class="muted">2026</p>
-          <p class="muted">Design, frontend &amp; LLM integration</p>
-          <p class="muted">Figma, Grok, Exa, openFDA</p>
-        </div>
+         On desktop the section is several screens tall and its content
+         stays pinned while you scroll; each screen of scrolling opens the
+         next tab. Clicking a title scrolls to that tab. On phones it's a
+         normal section and the titles are tapped instead.
 
-        <!-- No <a> wrapper: there's no case study page, and a range input
-             can't live inside a link. -->
-        <div class="compare compare--slider" data-cursor-hide>
-          <span class="compare__side compare__side--left">Figma</span>
-          <span class="compare__side compare__side--right">Built</span>
+         Panels:
+           video  -> click to play / pause (cursor shows PLAY / PAUSE)
+           link   -> make the panel an <a href="..." target="_blank">
+         Each panel's data-message is the cursor label.
 
-          <div class="compare__layer compare__layer--bottom">
-            <img src="images/fda/build.png" alt="The interface as built in code">
+         To add a tab: copy one .tabs__item and one .tabs__panel, and
+         give both the next data-tab number. The section height adjusts
+         itself to the number of tabs. -->
+    <section class="section wrap tabs-scroll" id="project-4">
+      <div class="tabs-scroll__pin">
+        <div class="grid tabs">
+
+          <div class="tabs__list">
+
+            <!-- Tab 1 -->
+            <div class="tabs__item is-active" data-tab="0">
+              <button class="tabs__title" type="button" aria-expanded="true">RECALL ME MAYBE</button>
+              <div class="tabs__body">
+                <div class="tabs__body-inner">
+                  <p class="project__desc">Scrapes consumer complaint forums and cross-references them
+                    against official FDA data to surface likely recalls before they're announced.</p>
+                  <p class="project__desc">I did the design and frontend, and built the Grok integration
+                    that classifies complaint text.</p>
+                  <p>2026</p>
+                  <p>Design, frontend &amp; LLM integration</p>
+                  <p>Figma, Grok, Exa, openFDA</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab 2 — placeholder -->
+            <div class="tabs__item" data-tab="1">
+              <button class="tabs__title" type="button" aria-expanded="false">PROJECT TWO</button>
+              <div class="tabs__body">
+                <div class="tabs__body-inner">
+                  <p class="project__desc">One or two sentences on what this is and the decision that
+                    mattered most.</p>
+                  <p>Year</p>
+                  <p>Role</p>
+                  <p>Tools</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab 3 — placeholder -->
+            <div class="tabs__item" data-tab="2">
+              <button class="tabs__title" type="button" aria-expanded="false">PROJECT THREE</button>
+              <div class="tabs__body">
+                <div class="tabs__body-inner">
+                  <p class="project__desc">One or two sentences on what this is and the decision that
+                    mattered most.</p>
+                  <p>Year</p>
+                  <p>Role</p>
+                  <p>Tools</p>
+                </div>
+              </div>
+            </div>
+
           </div>
-          <div class="compare__layer compare__layer--top">
-            <img src="images/fda/design.png" alt="The original Figma mockup">
+
+          <div class="tabs__stage">
+
+            <!-- Video panel. No autoplay, no loop: it plays only when clicked.
+                 Keep your own src here if it differs. -->
+            <div class="tabs__panel is-active" data-tab="0" data-cursor="light" data-message="Play">
+              <video src="images/fda/trailer.mp4" poster="images/fda/poster.png"
+                     playsinline preload="metadata"></video>
+            </div>
+
+            <!-- Link panel. Swap the <div> for an <a> once the site is live:
+                 <a class="tabs__panel" data-tab="1" data-cursor="light" data-message="Play"
+                    href="https://..." target="_blank" rel="noopener"> ... </a> -->
+            <div class="tabs__panel" data-tab="1" data-cursor="light" data-message="Play">
+              <!-- <img src="images/project-two.png" alt=""> -->
+            </div>
+
+            <div class="tabs__panel" data-tab="2" data-cursor="light" data-message="Play">
+              <!-- <img src="images/project-three.png" alt=""> -->
+            </div>
+
           </div>
 
-          <div class="compare__handle" aria-hidden="true"></div>
-          <input class="compare__range" type="range" min="0" max="100" value="50" step="0.1"
-                 aria-label="Wipe between the Figma mockup and the built interface">
         </div>
-
       </div>
     </section>
 
@@ -209,31 +275,23 @@
       <div class="grid">
 
         <div class="about__portrait">
-          <!-- <img src="images/portrait.jpg" alt="Xinyu Su" data-cursor="light"> -->
+          <img src="images/portrait.png" alt="Xinyu Su" data-cursor="light">
         </div>
 
         <div class="about__body">
           <p>Nice to meet you!</p>
 
-          <p>I'm currently a full-time student at the Georgia Institute of Technology. This past summer, I was a lead
-            instructor at iCode Augusta, where I got to teach kids how to make
-            games in Roblox, Unreal Engine, and Minecraft :D. I'm also did IT backend work to manage
-            the technical infrastructure&hellip; but that part's not as fun. I'm also working on getting
-            my AWS Cloud Practitioner certification.</p>
+          <p>I'm currently a full-time student at the Georgia Institute of Technology, pursuing a B.S. in CS and a minor in Industrial Design. Right now I'm a developer on the WELab VIP, building the work order system for a facility management app for local parishes.</p>
 
-          <p class="tight">I'm pursuing a B.S. in CS and a minor in Industrial Design. Outside of school, I love being
-            active
-            outdoors, playing music for my band, and exploring new hobbies.</p>
-          <p class="tight">I'm passionate about combining technology and creative arts to produce unique products.
-            I love how I can take ideas that come from pure imagination and design and build them
-            into real experiences.</p>
+          <p>This past summer, I was a lead instructor at iCode Augusta, where I got to teach kids how to make games in Roblox, Unreal Engine, and Minecraft :D. I also did IT backend work to manage the technical infrastructure… but that part's not as fun. I'm also working on getting my AWS Cloud Practitioner certification.</p>
+          <p>Outside of school, I love being active outdoors, playing music for my band, and exploring new hobbies. I'm passionate about combining technology and creative arts to produce unique products. I love how I can take ideas that come from pure imagination and design and build them into real experiences.</p>
 
           <p>Connect with me, I'd love to chat about anything, it doesn't have to be tech related!</p>
 
           <div class="about__links">
-            <a href="https://www.linkedin.com/in/YOUR-HANDLE" target="_blank" rel="noopener">LINKEDIN</a>
-            <a href="mailto:you@example.com">EMAIL</a>
-            <a href="https://github.com/YOUR-HANDLE" target="_blank" rel="noopener">GITHUB</a>
+            <a href="https://www.linkedin.com/in/xinyu-su-" target="_blank" rel="noopener">LINKEDIN</a>
+            <a href="mailto:xsu82@gatech.edu">EMAIL</a>
+            <a href="https://github.com/c-mfy" target="_blank" rel="noopener">GITHUB</a>
           </div>
         </div>
 
