@@ -48,7 +48,9 @@
     <!-- ============ HERO ============ -->
     <section class="section hero wrap" id="hero">
       <div class="hero__inner">
-        <h1 class="hero__title">Hi, I&rsquo;m Xinyu. I&rsquo;m a developer with the eye of a <span class="sel" data-cursor-hide>designer<span class="sel__frame" aria-hidden="true"><i></i><i></i><i></i><i></i><span class="sel__size"></span></span></span>.</h1>
+        <h1 class="hero__title">Hi, I&rsquo;m Xinyu. I&rsquo;m a developer with the eye of a <span class="sel"
+            data-cursor-hide>designer<span class="sel__frame" aria-hidden="true"><i></i><i></i><i></i><i></i><span
+                class="sel__size"></span></span></span>.</h1>
         <p class="hero__sub">Computer Science <span class="soft">and</span> Industrial Design <span
             class="soft">at</span> Georgia Institute of Technology</p>
       </div>
@@ -69,7 +71,8 @@
           <p class="muted">Tools: Figma, OpenAI Whisper, Mozilla Common Voice</p>
         </div>
 
-        <a class="project__link" href="speechwrite.html" data-message="View" aria-label="Open the SPEECHWRITE case study">
+        <a class="project__link" href="speechwrite.html" data-message="View"
+          aria-label="Open the SPEECHWRITE case study">
           <div class="project__media project__media--wide">
 
             <!-- Box 1 is the only one shown on small screens, so it takes a
@@ -121,7 +124,7 @@
                 <source media="(max-width: 760px)" srcset="images/hirae/hirae-1.png">
                 <img src="images/hirae/hirae-1.png" alt="Describe what this shows" data-cursor="light">
               </picture>
-             
+
             </div>
 
             <!-- Desktop only. -->
@@ -145,8 +148,10 @@
 
         <div class="project__meta">
           <h2 class="project__title">AKARI</h2>
-          <p class="project__desc">A natural sunlight lamp composed of different angled reflectors, designed to maximize the distribution of natural light within small rooms.</p>
-          <p class="project__desc">I iterated through the design of this lamp to optimize its performance and aesthetic appeal. Modeled and rendered in Blender.</p>
+          <p class="project__desc">A natural sunlight lamp composed of different angled reflectors, designed to maximize
+            the distribution of natural light within small rooms.</p>
+          <p class="project__desc">I iterated through the design of this lamp to optimize its performance and aesthetic
+            appeal. Modeled and rendered in Blender.</p>
           <p class="muted">Years: January 2026 - May 2026</p>
           <p class="muted">Role: Design, modeling</p>
           <p class="muted">Tools: Figma, Procreate, Sketching, Blender</p>
@@ -165,7 +170,7 @@
                 <source media="(max-width: 760px)" srcset="images/akari/akari-1.png">
                 <img src="images/akari/akari-1.png" alt="AKARI thumbnail" data-cursor="dark">
               </picture>
-             
+
             </div>
 
             <!-- Desktop only. -->
@@ -221,30 +226,35 @@
               </div>
             </div>
 
-            <!-- Tab 2 — placeholder -->
+            <!-- Tab 2 -->
             <div class="tabs__item" data-tab="1">
-              <button class="tabs__title" type="button" aria-expanded="false">PROJECT TWO</button>
+              <button class="tabs__title" type="button" aria-expanded="false">8 BALL RANDOMIZER</button>
               <div class="tabs__body">
                 <div class="tabs__body-inner">
-                  <p class="project__desc">One or two sentences on what this is and the decision that
-                    mattered most.</p>
-                  <p>Year</p>
-                  <p>Role</p>
-                  <p>Tools</p>
+                  <p class="project__desc">No to-do list accounts for indecisive people, so I made my own.</p>
+                  <p class="project__desc">Shake it and it
+                    picks an idea, then I keep it or ask again. Kept ideas go to an archive and get
+                    struck off once they're done. Simple and effective, I use it every day.</p>
+                  <p>2026</p>
+                  <p>Solo, design &amp; build</p>
+                  <p>Next.js, TypeScript, Vercel</p>
                 </div>
               </div>
             </div>
 
-            <!-- Tab 3 — placeholder -->
+            <!-- Tab 3 -->
             <div class="tabs__item" data-tab="2">
-              <button class="tabs__title" type="button" aria-expanded="false">PROJECT THREE</button>
+              <button class="tabs__title" type="button" aria-expanded="false">RSVP ME</button>
               <div class="tabs__body">
                 <div class="tabs__body-inner">
-                  <p class="project__desc">One or two sentences on what this is and the decision that
-                    mattered most.</p>
-                  <p>Year</p>
-                  <p>Role</p>
-                  <p>Tools</p>
+                  <p class="project__desc">An invite site for a friend's 21st, sent as a link in Instagram
+                    DMs. Guests RSVP and claim what they're bringing from a shared list.</p>
+                  <p class="project__desc">Each item has a limit, and the database checks it before saving,
+                    so two people can't grab the last slot at once. The page only ever sees counts, never
+                    names.</p>
+                  <p>2026</p>
+                  <p>Solo, design &amp; build</p>
+                  <p>HTML, CSS, JavaScript, Supabase</p>
                 </div>
               </div>
             </div>
@@ -256,20 +266,21 @@
             <!-- Video panel. No autoplay, no loop: it plays only when clicked.
                  Keep your own src here if it differs. -->
             <div class="tabs__panel is-active" data-tab="0" data-cursor="light" data-message="Play">
-              <video src="images/fda/trailer.mp4" poster="images/fda/poster.png"
-                     playsinline preload="metadata"></video>
+              <video src="images/fda/trailer.mp4" poster="images/fda/poster.png" playsinline preload="metadata"></video>
             </div>
 
             <!-- Link panel. Swap the <div> for an <a> once the site is live:
                  <a class="tabs__panel" data-tab="1" data-cursor="light" data-message="Play"
                     href="https://..." target="_blank" rel="noopener"> ... </a> -->
-            <div class="tabs__panel" data-tab="1" data-cursor="light" data-message="Play">
-              <!-- <img src="images/project-two.png" alt=""> -->
-            </div>
+            <a class="tabs__panel" data-tab="1" data-cursor="light" data-message="Play"
+              href="https://8ballrandomizer.vercel.app/" target="_blank" rel="noopener">
+              <img src="images/8ball/8ball-1.png" alt="8 Ball Randomizer interface">
+            </a>
 
-            <div class="tabs__panel" data-tab="2" data-cursor="light" data-message="Play">
-              <!-- <img src="images/project-three.png" alt=""> -->
-            </div>
+            <a class="tabs__panel" data-tab="2" data-cursor="light" data-message="Play"
+              href="https://rsvp-website-by-xin.vercel.app/" target="_blank" rel="noopener">
+              <img src="images/rsvp/rsvp-1.png" alt="RSVP Me invite page">
+            </a>
 
           </div>
 
@@ -288,10 +299,16 @@
         <div class="about__body">
           <p>Nice to meet you!</p>
 
-          <p>I'm currently a full-time student at the Georgia Institute of Technology, pursuing a B.S. in CS and a minor in Industrial Design. Right now I'm a developer on the WELab VIP, building the work order system for a facility management app for local parishes.</p>
+          <p>I'm currently a full-time student at the Georgia Institute of Technology, pursuing a B.S. in CS and a minor
+            in Industrial Design. Right now I'm a developer on the WELab VIP, building the work order system for a
+            facility management app for local parishes.</p>
 
-          <p>This past summer, I was a lead instructor at iCode Augusta, where I got to teach kids how to make games in Roblox, Unreal Engine, and Minecraft :D. I also did IT backend work to manage the technical infrastructure… but that part's not as fun. I'm also working on getting my AWS Cloud Practitioner certification.</p>
-          <p>Outside of school, I love being active outdoors, playing music for my band, and exploring new hobbies. I'm passionate about combining technology and creative arts to produce unique products. I love how I can take ideas that come from pure imagination and design and build them into real experiences.</p>
+          <p>This past summer, I was a lead instructor at iCode Augusta, where I got to teach kids how to make games in
+            Roblox, Unreal Engine, and Minecraft :D. I also did IT backend work to manage the technical infrastructure…
+            but that part's not as fun. I'm also working on getting my AWS Cloud Practitioner certification.</p>
+          <p>Outside of school, I love being active outdoors, playing music for my band, and exploring new hobbies. I'm
+            passionate about combining technology and creative arts to produce unique products. I love how I can take
+            ideas that come from pure imagination and design and build them into real experiences.</p>
 
           <p>Connect with me, I'd love to chat about anything, it doesn't have to be tech related!</p>
 
