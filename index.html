@@ -12,6 +12,8 @@
   <link rel="preconnect" href="https://api.fontshare.com">
   <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.26/dist/lenis.css">
   <link rel="stylesheet" href="css/style.css">
+  <!-- Phone layout. Loads only at phone widths. -->
+  <link rel="stylesheet" href="css/mobile.css" media="(max-width: 760px)">
 </head>
 
 <body>
@@ -34,6 +36,8 @@
       <a href="#work">WORK</a>
       <a href="#about">ABOUT</a>
     </nav>
+    <!-- Phones only: replaces WORK / ABOUT. -->
+    <a href="#contact" class="nav__at" aria-label="Contact">@</a>
   </header>
 
   <!-- Section dots. One per project; href matches the section id. -->
@@ -62,14 +66,16 @@
       <div class="grid">
 
         <div class="project__meta">
-          <h2 class="project__title">SPEECHWRITE</h2>
+          <h2 class="project__title"><a href="speechwrite.html">SpeechWrite</a></h2>
           <p class="project__desc">I co-built a tool that measures speech recognition bias across 5+ English accent
             groups, and found error rates 2–5× higher for non-Western accents.</p>
           <p class="project__desc">After testing a few ways to score transcription errors, I chose phoneme-level
             comparison over word error rate, and I was responsible for the analysis pipeline end to end.</p>
-          <p class="muted">Year: February 2026</p>
-          <p class="muted">Role: Research &amp; backend, in a team of two</p>
-          <p class="muted">Tools: Figma, OpenAI Whisper, Mozilla Common Voice</p>
+          <div class="project__facts">
+            <p class="muted"><span class="k">Year: </span>February 2026</p>
+            <p class="muted"><span class="k">Role: </span>Research &amp; backend, in a team of two</p>
+            <p class="muted"><span class="k">Tools: </span>Figma, OpenAI Whisper, Mozilla Common Voice</p>
+          </div>
         </div>
 
         <a class="project__link" href="speechwrite.html" data-message="View"
@@ -101,18 +107,20 @@
       <div class="grid">
 
         <div class="project__meta">
-          <h2 class="project__title">hirae</h2>
+          <h2 class="project__title project__title--as-is"><a href="hirae.html">hirae</a></h2>
           <p class="project__desc">A mobile app that turns walking into an exploration game. Areas you've
             physically walked through fill in green on the map and stay filled, and each walk auto-logs as a
             journal entry.</p>
           <p class="project__desc">I designed the whole thing in Figma and built it as a working prototype in
             Expo and React Native, including the location tracking, area reveal, and journal.</p>
-          <p class="muted">Year: August 2026</p>
-          <p class="muted">Role: Concept, design & prototype</p>
-          <p class="muted">Tools: Figma, Expo/React Native, Mapbox, Supabase</p>
+          <div class="project__facts">
+            <p class="muted"><span class="k">Year: </span>August 2026</p>
+            <p class="muted"><span class="k">Role: </span>Concept, design &amp; prototype</p>
+            <p class="muted"><span class="k">Tools: </span>Figma, Expo/React Native, Mapbox, Supabase</p>
+          </div>
         </div>
 
-        <a class="project__link" href="hirae.html" data-message="View" aria-label="Open the hiraecase study">
+        <a class="project__link" href="hirae.html" data-message="View" aria-label="Open the hirae case study">
           <div class="project__media">
 
             <!-- Box 1 is the only one shown on small screens, so it takes a
@@ -148,14 +156,16 @@
       <div class="grid">
 
         <div class="project__meta">
-          <h2 class="project__title">AKARI</h2>
+          <h2 class="project__title"><a href="akari.html">Akari</a></h2>
           <p class="project__desc">A natural sunlight lamp composed of different angled reflectors, designed to maximize
             the distribution of natural light within small rooms.</p>
           <p class="project__desc">I iterated through the design of this lamp to optimize its performance and aesthetic
             appeal. Modeled and rendered in Blender.</p>
-          <p class="muted">Years: January 2026 - May 2026</p>
-          <p class="muted">Role: Design, modeling</p>
-          <p class="muted">Tools: Figma, Procreate, Sketching, Blender</p>
+          <div class="project__facts">
+            <p class="muted"><span class="k">Years: </span>January 2026 - May 2026</p>
+            <p class="muted"><span class="k">Role: </span>Design, modeling</p>
+            <p class="muted"><span class="k">Tools: </span>Figma, Procreate, Sketching, Blender</p>
+          </div>
         </div>
 
         <a class="project__link" href="akari.html" data-message="View" aria-label="Open the AKARI case study">
@@ -311,7 +321,7 @@
             passionate about combining technology and creative arts to produce unique products. I love how I can take
             ideas that come from pure imagination and design and build them into real experiences.</p>
 
-          <p>Connect with me, I'd love to chat about anything, it doesn't have to be tech related!</p>
+          <p class="about__outro">Connect with me, I'd love to chat about anything, it doesn't have to be tech related!</p>
 
           <div class="about__links">
             <a href="https://www.linkedin.com/in/xinyu-su-" target="_blank" rel="noopener">LINKEDIN</a>
@@ -324,6 +334,31 @@
     </section>
 
   </main>
+
+  <!-- ============ CONTACT (phones only) ============
+       The dark band at the bottom of the phone layout. The nav's @
+       jumps here. Hidden on desktop, where the About links do this job. -->
+  <footer class="contact wrap" id="contact">
+    <p class="contact__line">I&rsquo;d love to chat about anything, tech or not.</p>
+    <ul class="contact__list">
+      <li>
+        <a href="mailto:xsu82@gatech.edu">
+          <span class="contact__title">Get in touch</span>
+          <span class="contact__sub">xsu82@gatech.edu</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/xinyu-su-" target="_blank" rel="noopener">
+          <span class="contact__title">Connect on LinkedIn</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/c-mfy" target="_blank" rel="noopener">
+          <span class="contact__title">See my code on GitHub</span>
+        </a>
+      </li>
+    </ul>
+  </footer>
 
   <script src="https://unpkg.com/lenis@1.3.26/dist/lenis.min.js"></script>
   <script src="https://unpkg.com/lenis@1.3.26/dist/lenis-snap.min.js"></script>

@@ -170,6 +170,10 @@ a {
   transform: scaleX(1);
 }
 
+/* The @ and the contact footer belong to the phone layout (mobile.css). */
+.nav__at,
+.contact { display: none; }
+
 /* ---------------------------------------------------------
    Scroll snap
    Lenis does not support CSS scroll-snap, so snapping is handled
@@ -237,7 +241,17 @@ a {
 .project__title {
   font-size: var(--fs-small);
   font-weight: 700;
+  /* Titles are typed in normal case for the phone layout;
+     desktop shows them in capitals. --as-is keeps a name as typed. */
+  text-transform: uppercase;
 }
+
+.project__title--as-is { text-transform: none; }
+
+/* Year / Role / Tools. On desktop the wrapper is invisible to layout,
+   so the three lines keep their usual spacing. Phones put them on
+   one slash-separated line (mobile.css). */
+.project__facts { display: contents; }
 
 .project__desc { max-width: 34ch; }
 
