@@ -26,7 +26,7 @@
      col-left     : width of the left column
      col-gap      : gap between the two columns
      40 + 300 + 38 = 378  <- where the right column begins  */
-  --page-margin: 40px;
+  --page-margin: 58px;
   --nav-reserve: 120px;
   --col-left: 400px;
   --col-gap: 60px;
@@ -236,6 +236,10 @@ a {
   gap: 18px;
   font-size: var(--fs-small);
   align-self: start;
+}
+.project__meta,
+.tabs__list {
+  padding-left: 40px;
 }
 
 .project__title {
